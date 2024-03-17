@@ -13,7 +13,7 @@ const sequelize = new Sequelize({
     storage: process.env.PG_URI,
     dialect: 'postgres',
     username: 'postgres',
-    password: 'Patterson1131178!'
+    password: process.env.DB_PASSWORD
 })
 
 try {
