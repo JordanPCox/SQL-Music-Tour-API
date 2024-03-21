@@ -3,24 +3,31 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class MeetGreet extends Model {
-    static associate({ Band }) {
+  class SetTime extends Model {
+    
+    static associate({ Band, Event, Stage }) {
       // band
-      MeetGreet.belongsTo(Band, {
+      SetTime.belongsTo(Band, {
         foreignKey: "band_id",
         as: "band"
       })
 
       // event
-      MeetGreet.belongsTo(Event, {
-        foreignKey: "Event_id",
+      SetTime.belongsTo(Event, {
+        foreignKey: "event_id",
         as: "event"
       })
+
+      // stage 
+      SetTime.belongsTo(Stage, {
+        foreignKey: "stage_id",
+        as: "stage"
+      })
     }
-  }
-  MeetGreet.init({
-    meet_greet_id: {
-      type: DataTypes.INTEGER,
+  };
+  SetTime.init({
+    set_time_id: {
+      type: DataTypes.INTEGER, 
       primaryKey: true,
       autoIncrement: true
     },
@@ -28,23 +35,27 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.SMALLINT,
       allowNull: false
     },
+    stage_id: {
+      type: DataTypes.SMALLINT,
+      allowNull: false
+    },
     band_id: {
       type: DataTypes.SMALLINT,
       allowNull: false
     },
-    meet_start_time: {
+    start_time: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    meet_end_time: {
+    end_time: {
       type: DataTypes.DATE,
       allowNull: false
-    }
+    },
   }, {
     sequelize,
-    modelName: 'MeetGreet',
-    tableName: 'meet_greets',
+    modelName: 'SetTime',
+    tableName: 'set_times',
     timestamps: false
   })
-  return MeetGreet
+  return SetTime
 }
