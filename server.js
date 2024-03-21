@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
 const bandsController = require('./controllers/bands_controller')
 app.use('/bands', bandsController)
 
+const stagesController = require('./controllers/stages_controller')
+app.use('/stages', stagesController)
+
+const eventsController = require('./controllers/events_controller')
+app.use('/events', eventsController)
+
 
 // // DATABASE
 // const sequelize = new Sequelize(`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
