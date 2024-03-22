@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
-
-    // stages
-    static associate({ Stage, StageEvent }) {
+    static associate({ Stage, MeetGreet, SetTime }) {
+      // stages
       Event.belongsToMany(Stage, {
         foreignKey: "event_id",
         as: "stages",
-        through: StageEvent
+        through: Stage
       })
-      // meet and greets
+      
+      // meet and greets 
       Event.hasMany(MeetGreet, {
         foreignKey: "event_id",
         as: "meet_greets"
       })
 
-      // set times
+      // set times 
       Event.hasMany(SetTime, {
         foreignKey: "event_id",
         as: "set_times"
@@ -50,8 +50,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Event',
-    tableName: 'bands',
+    tableName: 'events',
     timestamps: false
-  });
-  return Event;
-};
+  })
+  return Event
+}

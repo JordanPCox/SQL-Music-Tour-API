@@ -4,7 +4,6 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class SetTime extends Model {
-    
     static associate({ Band, Event, Stage }) {
       // band
       SetTime.belongsTo(Band, {
