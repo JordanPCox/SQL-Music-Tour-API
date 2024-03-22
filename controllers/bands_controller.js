@@ -1,6 +1,6 @@
 const bands = require('express').Router()
 const db = require('../models')
-const { Band } = db
+const { Band, MeetGreet, Event, SetTime } = db
 const { Op } = require('sequelize')
 
 // FIND ALL BANDS
@@ -18,10 +18,22 @@ bands.get('/', async (req, res) => {
     }
 })
 
-bands.get('/:id', async (req, res) => {
+bands.get('/:name', async (req, res) => {
     try {
         const specificBand = await Band.findOne({
-            where: { id: req.params.id }
+            where: { name: req.params.name },
+            include: [
+                { 
+                    model: MeetGreet, 
+                    as: "meet_greets",
+                include: { model: Event, as: "event" }
+                },
+                {
+                    model: SetTime,
+                    as: "set_times",
+                    include: { model: Event, as: "event" }
+                }
+            ]
         })
         res.json(specificBand)
     } catch (e) {
